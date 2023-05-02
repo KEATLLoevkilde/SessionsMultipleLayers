@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Log in</title>
+</head>
+<body>
+    <h1>Log in</h1>
+    <form th:method="post" th:object="${loginAttempt}">
+        <!-- wrongCredentials virker ikke. -->
+        <p th:if="${wrongCredentials}" class="error">Forkert brugerid eller password</p>
+        <div>
+            <label>User Name:</label>
+            <input type="text" id="userName" th:field="*{userName}">
+        </div>
+        <div>
+            <label>Password</label>
+            <input type="text" id="password" th:field="*{password}">
+        </div>
+
+        <button type="submit">Login</button>
+        <a th:href="@{'/'}"><button type="button">Fortryd</button></a>
+
+    </form>
+
+    <a th:href="@{/create/user}">
+        <button class="createuser">Create user</button>
+    </a>
+
+</body>
+</html>
