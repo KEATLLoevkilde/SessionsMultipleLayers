@@ -32,10 +32,6 @@ public class UserController {
         return "redirect:/login";
     }
 
-    private boolean isLoggedIn(HttpSession session) {
-        return session.getAttribute("user") != null;
-    }
-
     @GetMapping("/login")
     public String showLogin(Model model) {
         model.addAttribute("loginAttempt", new User());

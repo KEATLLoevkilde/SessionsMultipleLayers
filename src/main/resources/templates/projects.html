@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Projects</title>
+</head>
+<body>
+<h1>Your projects</h1>
+<table>
+  <tbody>
+  <tr th:each="project: ${projects}">
+    <td th:text="${project.name}"/>
+    <td>
+      <form method="get" th:action="@{/subprojects}">
+        <input type="hidden" name="projectId" th:value="${project.projectID}" />
+        <button type="submit">Subprojects</button>
+      </form>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<br>
+<a th:href="@{/create/project}">
+  <button>Add project</button>
+</a>
+</body>
+</html>
