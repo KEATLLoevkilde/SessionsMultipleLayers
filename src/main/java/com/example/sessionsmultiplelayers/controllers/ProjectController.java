@@ -65,7 +65,7 @@ public class ProjectController {
             // Set the session's current project to the selected project, so it can be used in other endpoints
             session.setAttribute("project", project);
 
-            return "redirect:/subprojects?projectID=" + projectId;
+            return "subprojects";
 
         } else {
             // handle error case
