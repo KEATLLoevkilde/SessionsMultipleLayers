@@ -55,15 +55,15 @@ public class ProjectController {
     }
 
     @GetMapping("/subprojects")
-    public String showSubprojects(@RequestParam("projectId") int projectId, HttpSession session, Model model) {
+    public String showSubprojects(@RequestParam() int projectId, HttpSession session, Model model) {
         // Retrieve and display subprojects for the given project ID
-        Project project = projectRepository.getProjectByID(projectId);
-        if (project != null) {
-            List<Subproject> subprojects = projectRepository.getSubprojects(project);
+        Project currentProject = projectRepository.getProjectByID(projectId);
+        if (currentProject != null) {
+            List<Subproject> subprojects = projectRepository.getSubprojects(currentProject);
             model.addAttribute("subprojects", subprojects);
 
             // Set the session's current project to the selected project, so it can be used in other endpoints
-            session.setAttribute("project", project);
+            session.setAttribute("currentProject", currentProject);
 
             return "subprojects";
 
@@ -72,22 +72,4 @@ public class ProjectController {
             return "redirect:/projects";
         }
     }
-
-//    @GetMapping("/subprojects")
-//    public String showSubprojects(HttpSession session, Model model) {
-//        // Retrieve and display subprojects for the given project ID
-//        Project project = (Project) session.getAttribute("project");
-//        if (project != null) {
-//            List<Subproject> subprojects = projectRepository.getSubprojects(project);
-//            model.addAttribute("subprojects", subprojects);
-//
-//            return "subprojects";
-//
-//        } else {
-//            // handle error case
-//            return "redirect:/projects";
-//        }
-//    }
-
-
 }
